@@ -1,73 +1,200 @@
-# React + TypeScript + Vite
+# ambers-ui-kit 🧩
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React component library built with TypeScript and CSS Modules. Lightweight, accessible, and unopinionated — drop it into any React project.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install ambers-ui-kit
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Components
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### `Button`
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Four variants, three sizes, loading state, and optional icon.
+
+| Prop | Type | Default |
+|---|---|---|
+| `variant` | `'primary' \| 'secondary' \| 'outline' \| 'ghost'` | `'primary'` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| `loading` | `boolean` | `false` |
+| `icon` | `React.ReactNode` | — |
+
+```tsx
+import { Button } from 'ambers-ui-kit'
+
+<Button variant="primary" size="md" icon={<Star />}>
+  Click Me
+</Button>
+<Button variant="outline" loading>
+  Saving...
+</Button>
 ```
+
+---
+
+### `Input`
+
+Text input with label, error state, hint text, and optional icon slot.
+
+| Prop | Type | Default |
+|---|---|---|
+| `label` | `string` | — |
+| `error` | `string` | — |
+| `hint` | `string` | — |
+| `icon` | `React.ReactNode` | — |
+
+Accepts all standard `<input>` attributes.
+
+```tsx
+import { Input } from 'ambers-ui-kit'
+
+<Input label="Email" type="email" placeholder="you@example.com" />
+<Input label="Password" error="Must be at least 8 characters" />
+```
+
+---
+
+### `Textarea`
+
+Stretchable textarea with the same label/error/hint pattern as `Input`.
+
+| Prop | Type | Default |
+|---|---|---|
+| `label` | `string` | — |
+| `error` | `string` | — |
+| `hint` | `string` | — |
+| `rows` | `number` | `4` |
+
+Accepts all standard `<textarea>` attributes.
+
+```tsx
+import { Textarea } from 'ambers-ui-kit'
+
+<Textarea label="Bio" rows={6} placeholder="Tell us about yourself..." />
+```
+
+---
+
+### `Select`
+
+Styled native `<select>` with placeholder support and shared form styling.
+
+| Prop | Type | Default |
+|---|---|---|
+| `label` | `string` | — |
+| `error` | `string` | — |
+| `hint` | `string` | — |
+| `options` | `{ value: string; label: string }[]` | required |
+| `placeholder` | `string` | — |
+
+```tsx
+import { Select } from 'ambers-ui-kit'
+
+<Select
+  label="Role"
+  options={[
+    { value: 'dev', label: 'Developer' },
+    { value: 'design', label: 'Designer' },
+  ]}
+  placeholder="Choose a role"
+/>
+```
+
+---
+
+### `Toggle`
+
+CSS-only animated toggle with hidden checkbox for full keyboard accessibility.
+
+| Prop | Type | Default |
+|---|---|---|
+| `label` | `string` | required |
+
+Accepts all standard `<input type="checkbox">` attributes.
+
+```tsx
+import { Toggle } from 'ambers-ui-kit'
+
+<Toggle label="Dark Mode" checked={dark} onChange={(e) => setDark(e.target.checked)} />
+```
+
+---
+
+### `Modal`
+
+Portal-based modal with animated trace border entry, focus trap, overlay click-to-close, and Escape key handling.
+
+| Prop | Type | Default |
+|---|---|---|
+| `open` | `boolean` | required |
+| `onClose` | `() => void` | required |
+| `title` | `string` | required |
+| `children` | `React.ReactNode` | required |
+
+```tsx
+import { Modal } from 'ambers-ui-kit'
+
+<Modal open={isOpen} onClose={() => setIsOpen(false)} title="Confirm">
+  <p>Are you sure?</p>
+</Modal>
+```
+
+---
+
+### `Toast`
+
+Lightweight toast system with `success`, `error`, and `info` types. Place `<ToastDisplay />` once at your app root.
+
+```tsx
+import { toast, ToastDisplay } from 'ambers-ui-kit'
+
+// In your app layout:
+function App() {
+  return (
+    <>
+      <ToastDisplay />
+      <YourApp />
+    </>
+  )
+}
+
+// Anywhere in your app:
+toast.success('Saved!')
+toast.error('Something went wrong')
+toast.info('Heads up')
+```
+
+---
+
+### `Tooltip`
+
+Hover/focus tooltip with four positions. Uses a two-layer CSS approach (positioning + popIn animation).
+
+| Prop | Type | Default |
+|---|---|---|
+| `text` | `string` | required |
+| `position` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` |
+| `children` | `React.ReactNode` | required |
+
+```tsx
+import { Tooltip } from 'ambers-ui-kit'
+
+<Tooltip text="Delete forever" position="bottom">
+  <Button variant="ghost">×</Button>
+</Tooltip>
+```
+
+## Development
+
+```bash
+git clone <repo-url>
+cd ambers-ui-kit
+npm install
+npm run build
+```
+
+## License
+
+MIT
