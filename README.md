@@ -189,7 +189,7 @@ import { Tooltip } from 'ambers-ui-kit'
 ## Development
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/AmberTJC/ambers-ui-kit.git
 cd ambers-ui-kit
 npm install
 npm run build
