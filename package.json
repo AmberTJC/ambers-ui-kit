@@ -1,6 +1,6 @@
 {
   "name": "ambers-ui-kit",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "main": "./dist/my-ui.js",
   "module": "./dist/my-ui.js",
@@ -9,7 +9,8 @@
     ".": {
       "import": "./dist/my-ui.js",
       "types": "./dist/src/index.d.ts"
-    }
+    },
+    "./dist/*": "./dist/*"
   },
   "files": [
     "dist"
