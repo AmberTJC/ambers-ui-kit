@@ -1,22 +1,25 @@
 {
   "name": "ambers-ui-kit",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "main": "./dist/my-ui.js",
   "module": "./dist/my-ui.js",
-  "types": "./dist/my-ui.d.ts",
+  "types": "./dist/src/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/my-ui.js",
-      "types": "./dist/my-ui.d.ts"
+      "types": "./dist/src/index.d.ts"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "react": "^19.2.6",

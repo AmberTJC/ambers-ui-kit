@@ -16,7 +16,7 @@ Four variants, three sizes, loading state, and optional icon.
 
 | Prop | Type | Default |
 |---|---|---|
-| `variant` | `'primary' \| 'secondary' \| 'outline' \| 'ghost'` | `'primary'` |
+| `variant` | `'primary' \| 'secondary' \| 'outline' \| 'ghost'` | 
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` |
 | `loading` | `boolean` | `false` |
 | `icon` | `React.ReactNode` | — |
