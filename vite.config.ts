@@ -13,7 +13,16 @@ export default defineConfig({
       fileName: 'my-ui',
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'jsxRuntime',
+        },
+      },
     },
+    // Prevent rolldown CJS interop for external deps
+    cssCodeSplit: false,
   },
 })
